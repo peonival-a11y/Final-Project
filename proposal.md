@@ -1,7 +1,7 @@
 # Wanderer
 
 ## Repository
-<Link to your project's public GitHub respository>
+https://github.com/peonival-a11y/Final-Project.git
 
 ## Description
 I want to create a slide scroller game where I have a small character jumping on platforms and getting coins, and maybe add a counter to it 
