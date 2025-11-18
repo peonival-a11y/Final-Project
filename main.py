@@ -24,6 +24,11 @@ def main(window):
     while run:
         clock.tick(fps)
 
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+                break
+
 
 
 
