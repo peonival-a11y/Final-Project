@@ -24,7 +24,6 @@ background_image = pygame.image.load(image_path).convert()
 background_image = pygame.transform.scale(background_image, (width, height))
 
 #it'll help the sprites collision for this
-
 class Player(pygame.sprite.Sprite):
    color = (255, 0, 0)
    def __init__(self, x, y, width, height):
@@ -58,13 +57,22 @@ class Player(pygame.sprite.Sprite):
     def loop(self, fps):
         self.move(self.x_vel, self.y_vel) # focusing on how it moves for now
 
-    def draw(self, win, offset_x):
+    def draw(self, win):
         pygame.draw.rect(win, self.color, self.rect)
 
     def draw(player):
         player.draw(window)
+
         pygame.display.update()
 
+def handle_move(player):
+    keys = pygame.key.get_pressed()
+
+    player.x_vel = 0
+    if keys[pygame.K_LEFT]:
+        player.move_left(player_vel)
+    if keys[pygame.K_RIGHT]:
+         player.move_right(player_vel)
 
 def main(window):
     clock = pygame.time.Clock()
