@@ -59,7 +59,8 @@ class Player(pygame.sprite.Sprite):
     def loop(self, fps):
         self.move(self.x_vel, self.y_vel) # focusing on how it moves for now
 
-
+    def draw(self, win, offset_x):
+        pygame.draw.rect(win, self.color, self.rect)
 
 def main(window):
     clock = pygame.time.Clock()
