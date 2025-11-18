@@ -15,9 +15,6 @@ fps = 60
 player_vel = 5
 
 window = pygame.display.set_mode((width, height))
-background_image = pygame.image.load("tempbg.jpg").convert()
-background_image = pygame.transform.scale(background_image, (width, height))
-#important to have the directory connected to this
 
 
 
@@ -31,10 +28,6 @@ def main(window):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-                break
-        img = pygame.image.load('tempbg.jpg').convert_alpha()
-        window.blit(img, (0,0))
-
 
 
     pygame.quit()
