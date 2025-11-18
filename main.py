@@ -86,7 +86,8 @@ def main(window):
                 run = False
 
         window.blit(background_image, (0, 0))
-
+        player.loop(fps)
+        handle_move(player)
         pygame.display.flip() # Update the full display Surface to the screen
 
     pygame.quit()
