@@ -1,0 +1,24 @@
+import os
+import random
+import math
+import pygame
+from os import listdir
+from os.path import isfile, join
+pygame.init()
+
+pygame.display.set_caption("Platform")
+
+# temporary background
+bg_color = (255, 255, 255)
+width, height = 600, 600
+fps = 60
+# this will determine the speed of the character
+player_vel = 5
+
+window = pygame.display.set_mode((width, height))
+
+def main(window):
+    pass
+
+if __name__=="__main__":
+    main(window)
