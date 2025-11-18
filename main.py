@@ -17,9 +17,17 @@ player_vel = 5
 
 window = pygame.display.set_mode((width, height))
 
+#important to have the directory connected to this
+def get_background(name):
+    image = pygame.image.load(join("Assets", "background", 'tempng.jpg'))
+
+
+def draw(window, background):
+    pygame.display.update()
+
 def main(window):
     clock = pygame.time.Clock()
-
+    background = get_background("tempbg.jpg")
     run = True
     while run:
         clock.tick(fps)
