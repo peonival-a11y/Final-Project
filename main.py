@@ -56,7 +56,8 @@ class Player(pygame.sprite.Sprite):
             self.direction = "right"
             self.animation_count = 0
 
-
+    def loop(self, fps):
+        self.move(self.x_vel, self.y_vel) # focusing on how it moves for now
 
 
 
