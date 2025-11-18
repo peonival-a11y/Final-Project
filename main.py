@@ -9,7 +9,6 @@ pygame.init()
 pygame.display.set_caption("Platform")
 
 # temporary background
-bg_color = (255, 255, 255)
 width, height = 1000, 850
 fps = 60
 # this will determine the speed of the character
