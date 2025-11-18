@@ -16,18 +16,15 @@ fps = 60
 player_vel = 5
 
 window = pygame.display.set_mode((width, height))
-
+background_image = pygame.image.load("tempbg.jpg").convert()
+background_image = pygame.transform.scale(background_image, (width, height))
 #important to have the directory connected to this
-def get_background(name):
-    image = pygame.image.load(join("Assets", "background", 'tempng.jpg'))
 
 
-def draw(window, background):
-    pygame.display.update()
 
 def main(window):
     clock = pygame.time.Clock()
-    background = get_background("tempbg.jpg")
+
     run = True
     while run:
         clock.tick(fps)
@@ -36,8 +33,13 @@ def main(window):
             if event.type == pygame.QUIT:
                 run = False
                 break
+        img = pygame.image.load('tempbg.jpg').convert_alpha()
+        window.blit(img, (0,0))
 
 
+
+    pygame.quit()
+    quit()
 
 
 if __name__=="__main__":
