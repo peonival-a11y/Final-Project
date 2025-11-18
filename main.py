@@ -16,7 +16,12 @@ player_vel = 5
 
 window = pygame.display.set_mode((width, height))
 
+script_dir = os.path.dirname(__file__) 
 
+# to help with directory to retrive the image for the background
+image_path = os.path.join(script_dir, 'assets', 'tempbg.png')
+background_image = pygame.image.load(image_path).convert()
+background_image = pygame.transform.scale(background_image, (width, height))
 
 def main(window):
     clock = pygame.time.Clock()
@@ -29,6 +34,9 @@ def main(window):
             if event.type == pygame.QUIT:
                 run = False
 
+        window.blit(background_image, (0, 0))
+
+        pygame.display.flip() # Update the full display Surface to the screen
 
     pygame.quit()
     quit()
