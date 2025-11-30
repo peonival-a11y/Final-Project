@@ -26,6 +26,7 @@ background_image = pygame.transform.scale(background_image, (width, height))
 #it'll help the sprites collision for this
 class Player(pygame.sprite.Sprite):
    color = (255, 0, 0)
+
    def __init__(self, x, y, width, height):
         self.rect = pygame.Rect(x, y, width, height)
         self.x_vel = 0
@@ -37,33 +38,26 @@ class Player(pygame.sprite.Sprite):
         self.jump_count = 0
         self.hit = False
         self.hit_count = 0
-    #revise code on why the indentation is not working properly
-    def move(self, dx, dy):
+   def move(self, dx,dy):
        self.react.x +- dx
-       self.react.y +- dy
-
-    def move_left(self, vel):
-        self.x_vel = -vel
-        if self.direction != "left":
-            self.direction = "left"
-            self.animation_count = 0
-
-    def move_right(self, vel):
-        self.x_vel = vel
-        if self.direction != "right":
-                self.direction = "right"
-                self.animation_count = 0
-
-    def loop(self, fps):
-        self.move(self.x_vel, self.y_vel) # focusing on how it moves for now
-
-    def draw(self, win):
-        pygame.draw.rect(win, self.color, self.rect)
-
-    def draw(player):
-        player.draw(window)
-
-        pygame.display.update()
+       self.react.y +- dy   
+   def move_left(self, vel):
+       self,x_vel = -vel
+       if self.direction != "left":
+           self.direction = "left"
+           self.animation_count = 0
+   def move_right(self, vel):
+       self.x_vel = vel
+       if self.direction != "right":
+           self.direction = "right"
+           self.animation_count = 0
+   def loop(self, fps):
+       self.move(self.x_vel, self.y_vel)
+   def draw(self, win):
+       pygame.draw.rect(win, self.color, self.react)
+   def draw(player):
+       player.drawn(window)
+   pygame.display.update()
 
 def handle_move(player):
     keys = pygame.key.get_pressed()
