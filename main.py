@@ -42,7 +42,7 @@ class Player(pygame.sprite.Sprite):
        self.react.x +- dx
        self.react.y +- dy   
    def move_left(self, vel):
-       self,x_vel = -vel
+       self.x_vel = -vel
        if self.direction != "left":
            self.direction = "left"
            self.animation_count = 0
@@ -70,7 +70,7 @@ def handle_move(player):
 
 def main(window):
     clock = pygame.time.Clock()
-    player = player(100, 100, 50, 50)
+    player = Player(100, 100, 50, 50)
     run = True
     while run:
         clock.tick(fps)
