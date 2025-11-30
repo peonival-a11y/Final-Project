@@ -39,8 +39,8 @@ class Player(pygame.sprite.Sprite):
         self.hit = False
         self.hit_count = 0
    def move(self, dx,dy):
-       self.react.x +- dx
-       self.react.y +- dy   
+       self.rect.x += dx
+       self.rect.y += dy   
    def move_left(self, vel):
        self.x_vel = -vel
        if self.direction != "left":
@@ -54,7 +54,7 @@ class Player(pygame.sprite.Sprite):
    def loop(self, fps):
        self.move(self.x_vel, self.y_vel)
    def draw(self, win):
-       pygame.draw.rect(win, self.color, self.react)
+       pygame.draw.rect(win, self.color, self.rect)
    def draw(player):
        player.drawn(window)
    pygame.display.update()
