@@ -38,26 +38,31 @@ class Player(pygame.sprite.Sprite):
         self.jump_count = 0
         self.hit = False
         self.hit_count = 0
+
    def move(self, dx,dy):
        self.rect.x += dx
-       self.rect.y += dy   
+       self.rect.y += dy
+
    def move_left(self, vel):
        self.x_vel = -vel
        if self.direction != "left":
            self.direction = "left"
            self.animation_count = 0
+
    def move_right(self, vel):
        self.x_vel = vel
        if self.direction != "right":
            self.direction = "right"
            self.animation_count = 0
+
    def loop(self, fps):
        self.move(self.x_vel, self.y_vel)
+
    def draw(self, win):
        pygame.draw.rect(win, self.color, self.rect)
-   def draw(player):
-       player.drawn(window)
-   pygame.display.update()
+
+
+
 
 def handle_move(player):
     keys = pygame.key.get_pressed()
@@ -82,6 +87,7 @@ def main(window):
         window.blit(background_image, (0, 0))
         player.loop(fps)
         handle_move(player)
+        player.draw(window)
         pygame.display.flip() # Update the full display Surface to the screen
 
     pygame.quit()
