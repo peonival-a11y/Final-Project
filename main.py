@@ -91,7 +91,8 @@ class Player(pygame.sprite.Sprite):
        self.fall_count += 1
 
    def draw(self, win):
-       pygame.draw.rect(win, self.color, self.rect)
+       self.sprite = self.sprites["idle_" + self.direction][0]
+       win.blit(self.sprite, (self.rect.x, self.rect.y))
 
 
 
