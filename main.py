@@ -35,6 +35,15 @@ def load_sprite_sheets(dir1, dir2, width, height, direction=False):
             surface.blit(sprite_sheet, (0,0), rect)
             sprites.append(pygame.transform.scale2x(surface))
 
+        if direction:
+            all_sprites[images.replace(".png", "") + "_right"] = sprites
+            all_sprites[images.replace(".png", "") + "_left"] = flip(sprites)
+
+        else:
+            all_sprites[image.replace(".png", "")] = sprites
+
+    return all_sprites
+
 script_dir = os.path.dirname(__file__) 
 
 # to help with directory to retrive the image for the background
