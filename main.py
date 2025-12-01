@@ -55,7 +55,7 @@ background_image = pygame.transform.scale(background_image, (width, height))
 class Player(pygame.sprite.Sprite):
    color = (255, 0, 0)
    gravity = 1
-
+   sprites = load_sprite_sheets("MainCharacters", "", 32, 32, True) #name of the character here between "" and the MainCharacters is for the directory folder
    def __init__(self, x, y, width, height):
         self.rect = pygame.Rect(x, y, width, height)
         self.x_vel = 0
