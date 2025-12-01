@@ -16,6 +16,8 @@ player_vel = 5
 
 window = pygame.display.set_mode((width, height))
 
+
+
 script_dir = os.path.dirname(__file__) 
 
 # to help with directory to retrive the image for the background
@@ -26,6 +28,7 @@ background_image = pygame.transform.scale(background_image, (width, height))
 #it'll help the sprites collision for this
 class Player(pygame.sprite.Sprite):
    color = (255, 0, 0)
+   gravity = 1
 
    def __init__(self, x, y, width, height):
         self.rect = pygame.Rect(x, y, width, height)
@@ -56,7 +59,10 @@ class Player(pygame.sprite.Sprite):
            self.animation_count = 0
 
    def loop(self, fps):
+       self.y_vel += min(1, (self.fall_count / fps) * self.gravity)
        self.move(self.x_vel, self.y_vel)
+
+       self.fall_count += 1
 
    def draw(self, win):
        pygame.draw.rect(win, self.color, self.rect)
@@ -87,7 +93,7 @@ def main(window):
         window.blit(background_image, (0, 0))
         player.loop(fps)
         handle_move(player)
-        player.draw(window)
+        player.draw(window)# DO NOT REMOVE THIS IT FIXED ISSUE OF IT APPEARING 
         pygame.display.flip() # Update the full display Surface to the screen
 
     pygame.quit()
