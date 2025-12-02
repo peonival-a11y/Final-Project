@@ -153,8 +153,8 @@ class Player(pygame.sprite.Sprite):
        self.mask = pygame.mask.from_surface(self.sprite)
 
 
-   def draw(self, win):
-       win.blit(self.sprite, (self.rect.x, self.rect.y))
+   def draw(self, win, offset_x):
+       win.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
 
 class Object(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, name=None):
@@ -165,8 +165,8 @@ class Object(pygame.sprite.Sprite):
         self.height = height
         self.name = name
 
-    def draw(self, win):
-       win.blit(self.image, (self.rect.x, self.rect.y))
+    def draw(self, win, offset_x):
+       win.blit(self.image, (self.rect.x - offset_x, self.rect.y))
 
 class Block(Object):
     def __init__(self, x, y, size):
@@ -202,13 +202,13 @@ def handle_move(player, objects):
 
     handle_verticle_collision(player, objects, player.y_vel)
 
-def draw_objects(window, player, objects):
+def draw_objects(window, player, objects, offset_x):
     window.blit(background_image, (0, 0))
     
     # Draw all static objects/blocks
     for obj in objects:
-        obj.draw(window)
-    player.draw(window)
+        obj.draw(window, offset_x)
+    player.draw(window, offset_x)
     pygame.display.update()
 
 def main(window):
