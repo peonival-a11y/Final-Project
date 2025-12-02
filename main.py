@@ -207,9 +207,12 @@ def handle_move(player, objects):
     keys = pygame.key.get_pressed()
 
     player.x_vel = 0
-    if keys[pygame.K_LEFT]:
+    collide_left = collide(player,objects, -player_vel)
+    collide_right = collide(player,objects, player_vel)
+
+    if keys[pygame.K_LEFT] and not collide_left:
         player.move_left(player_vel)
-    if keys[pygame.K_RIGHT]:
+    if keys[pygame.K_RIGHT] and not collide_right:
          player.move_right(player_vel)
 
     handle_verticle_collision(player, objects, player.y_vel)
