@@ -122,7 +122,7 @@ class Player(pygame.sprite.Sprite):
 
 
    def draw(self, win):
-       self.sprite = self.sprites["idle_" + self.direction][0]
+
        win.blit(self.sprite, (self.rect.x, self.rect.y))
 
 
