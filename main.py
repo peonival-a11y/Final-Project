@@ -20,13 +20,21 @@ def flip(sprites):
     return [pygame.transform.flip(sprite, True, False)for sprite in sprites]
 
 def load_sprite_sheets(dir1, dir2, width, height, direction=False):
-    path = join('assets', dir1, dir2)
-    images = [f for f in listdir(path) if isfile(join(path, f))]
+    script_dir = os.path.dirname(__file__)
+    path = os.path.join(script_dir, "Assets", dir1, dir2)
+
+    images_files = [f for f in listdir(path) if isfile(join(path, f))]
 
     all_sprites = {}
 
-    for image in images:
-        sprite_sheet = pygame.image.load(join(path, image)).convert_alpha()
+    for image_name in images_files:
+        full_image_path = join(path, image_name)
+
+        try:
+            sprite_sheet = pygame.image.load(join(path, full_image_path)).convert_alpha()
+        except pygame.error as e:
+            print(f"Error loading image {image_name}: {e}")
+            continue
 
         sprites = []
         for i in range(sprite_sheet.get_width() // width):
@@ -36,7 +44,7 @@ def load_sprite_sheets(dir1, dir2, width, height, direction=False):
             sprites.append(pygame.transform.scale2x(surface))
 
         if direction:
-            all_sprites[images.replace(".png", "") + "_right"] = sprites
+            all_sprites = images.replace(".png", "").replace(".jpg", "") + "_right"
             all_sprites[images.replace(".png", "") + "_left"] = flip(sprites)
 
         else:
@@ -47,7 +55,7 @@ def load_sprite_sheets(dir1, dir2, width, height, direction=False):
 script_dir = os.path.dirname(__file__) 
 
 # to help with directory to retrive the image for the background
-image_path = os.path.join(script_dir, 'assets', 'tempbg.png')
+image_path = os.path.join(script_dir, 'Assets', 'tempbg.png')
 background_image = pygame.image.load(image_path).convert()
 background_image = pygame.transform.scale(background_image, (width, height))
 
