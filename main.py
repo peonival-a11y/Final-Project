@@ -245,8 +245,6 @@ def main(window):
                 (player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
             offset_x += player.x_vel
         
-
-        
         pygame.display.flip() # Update the full display Surface to the screen
 
     pygame.quit()
