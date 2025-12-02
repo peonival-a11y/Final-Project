@@ -220,6 +220,8 @@ def main(window):
     floor = [Block(i * block_size, height - block_size, block_size) 
              for i in range (-width // block_size, (width * 2) // block_size)]
     
+    offset_x = 0
+    scroll_area_width = 200
 
     run = True
     while run:
@@ -237,6 +239,11 @@ def main(window):
         window.blit(background_image, (0, 0))
         player.loop(fps)
         handle_move(player, floor)
+        draw_objects(offset_x)
+
+        if ((player.rect.right - offset_x >= width - scroll_area_width) and player.x_vel > 0) or (
+                (player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
+            offset_x += player.x_vel
         
         for block in floor:
             block.draw(window)
