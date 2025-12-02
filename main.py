@@ -191,6 +191,18 @@ def handle_verticle_collision(player,objects, dy):
 
     return collided_objects
 
+def collide(player, objects, dx):
+    player.move(dx, 0)
+    player.update()
+    for obj in objects:
+        if pygame.collide_mask(player, obj):
+            collide_object = obj
+            break
+    
+    player.move(-dx, 0)
+    player.update()
+    return collide_object
+
 def handle_move(player, objects):
     keys = pygame.key.get_pressed()
 
