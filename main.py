@@ -37,6 +37,7 @@ def load_sprite_sheets(dir1, dir2, width, height, direction=False):
             continue
 
         sprites = []
+
         for i in range(sprite_sheet.get_width() // width):
             surface = pygame.Surface((width, height), pygame.SRCALPHA, 32)
             rect =  pygame.Rect(i * width, 0, width, height)
@@ -44,11 +45,12 @@ def load_sprite_sheets(dir1, dir2, width, height, direction=False):
             sprites.append(pygame.transform.scale2x(surface))
 
         if direction:
-            all_sprites = images.replace(".png", "").replace(".jpg", "") + "_right"
-            all_sprites[images.replace(".png", "") + "_left"] = flip(sprites)
+            base_name = image_name.replace(".png", "").replace(".jpg", "")
+            all_sprites[base_name + "_right"] = sprites
+            all_sprites[base_name + "_left"] = flip(sprites)
 
         else:
-            all_sprites[image.replace(".png", "")] = sprites
+            all_sprites[image_name.replace(".png", "")] = sprites
 
     return all_sprites
 
