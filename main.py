@@ -220,7 +220,8 @@ def main(window):
     floor = [Block(i * block_size, height - block_size, block_size) 
              for i in range (-width // block_size, (width * 2) // block_size)]
     
-    objects = [*floor, Block(0, height - block_size * 2, block_size)]
+    objects = [*floor, Block(0, height - block_size * 2, block_size),
+               Block(block_size * 3, height - block_size * 4, block_size)]
     
     offset_x = 0
     scroll_area_width = 200
