@@ -58,7 +58,7 @@ def get_block(size):
     path = join("Assets", "Terrain", "Terrain.png")
     image = pygame.image.load(path).convert_alpha()
     surface = pygame.Surface((size, size), pygame.SRCALPHA, 32)
-    rect = pygame.Rect(96, 0, size, size)
+    rect = pygame.Rect(96, 0, size, size) # the 96 is for the block we are using based on the tutorial
     surface.blit(image, (0, 0), rect)
     return pygame.transform.scale2x(surface)
 
@@ -148,7 +148,7 @@ class Object(pygame.sprite.Sprite):
 class Block(Object):
     def __init__(self, x, y, size):
         super().__init__(x, y, size, size)
-        block = load_block(size)
+        block = get_block(size)
         self.image.blit(block, (0, 0))
         self.mask = pygame.mask.from_surface(self.image)
 
@@ -162,9 +162,31 @@ def handle_move(player):
     if keys[pygame.K_RIGHT]:
          player.move_right(player_vel)
 
+def draw_objects(window, player, objects):
+    """
+    Handles all drawing operations for a single frame.
+    Draws background first, then static objects, then the player.
+    """
+    window.blit(background_image, (0, 0))
+    
+    # Draw all static objects/blocks
+    for obj in objects:
+        obj.draw(window)
+
+    # Draw the player on top of everything else
+    player.draw(window)
+
+    # Update the display once all elements are drawn
+    pygame.display.update()
+
 def main(window):
     clock = pygame.time.Clock()
+
+    block_size = 96
+
     player = Player(100, 100, 50, 50)
+    blocks = [Block(0, height - block_size, block_size)]
+
     run = True
     while run:
         clock.tick(fps)
@@ -176,6 +198,10 @@ def main(window):
         window.blit(background_image, (0, 0))
         player.loop(fps)
         handle_move(player)
+        
+        for block in blocks:
+            block.draw(window)
+
         player.draw(window)# DO NOT REMOVE THIS IT FIXED ISSUE OF IT APPEARING 
         pygame.display.flip() # Update the full display Surface to the screen
 
