@@ -153,7 +153,7 @@ class Block(Object):
         self.mask = pygame.mask.from_surface(self.image)
 
 
-def handle_move(player):
+def handle_move(player, objects):
     keys = pygame.key.get_pressed()
 
     player.x_vel = 0
