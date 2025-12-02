@@ -186,6 +186,8 @@ def handle_move(player, objects):
     if keys[pygame.K_RIGHT]:
          player.move_right(player_vel)
 
+    handle_verticle_collision(player, objects, player.y_vel)
+
 def draw_objects(window, player, objects):
     window.blit(background_image, (0, 0))
     
@@ -215,7 +217,7 @@ def main(window):
 
         window.blit(background_image, (0, 0))
         player.loop(fps)
-        handle_move(player)
+        handle_move(player, floor)
         
         for block in floor:
             block.draw(window)
