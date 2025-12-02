@@ -239,16 +239,16 @@ def main(window):
         window.blit(background_image, (0, 0))
         player.loop(fps)
         handle_move(player, floor)
-        draw_objects(offset_x)
+        draw_objects(window, player, floor, offset_x)
 
         if ((player.rect.right - offset_x >= width - scroll_area_width) and player.x_vel > 0) or (
                 (player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
             offset_x += player.x_vel
         
         for block in floor:
-            block.draw(window)
+            block.draw(window, offset_x)
 
-        player.draw(window)# DO NOT REMOVE THIS IT FIXED ISSUE OF IT APPEARING 
+        player.draw(window, offset_x)# DO NOT REMOVE THIS IT FIXED ISSUE OF IT APPEARING 
         pygame.display.flip() # Update the full display Surface to the screen
 
     pygame.quit()
