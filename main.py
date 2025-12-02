@@ -50,12 +50,13 @@ script_dir = os.path.dirname(__file__)
 image_path = os.path.join(script_dir, 'assets', 'tempbg.png')
 background_image = pygame.image.load(image_path).convert()
 background_image = pygame.transform.scale(background_image, (width, height))
-animation_delay = 5
+
 #it'll help the sprites collision for this
 class Player(pygame.sprite.Sprite):
    color = (255, 0, 0)
    gravity = 1
    sprites = load_sprite_sheets("MainCharacters", "", 32, 32, True) #name of the character here between "" and the MainCharacters is for the directory folder
+   animation_delay = 5
 
    def __init__(self, x, y, width, height):
         self.rect = pygame.Rect(x, y, width, height)
