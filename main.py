@@ -56,7 +56,8 @@ class Player(pygame.sprite.Sprite):
    color = (255, 0, 0)
    gravity = 1
    sprites = load_sprite_sheets("MainCharacters", "", 32, 32, True) #name of the character here between "" and the MainCharacters is for the directory folder
-   animation_delay = 5
+   animation_delay = 5 # changes the speed of the sprites movements
+   
 
    def __init__(self, x, y, width, height):
         self.rect = pygame.Rect(x, y, width, height)
@@ -103,6 +104,11 @@ class Player(pygame.sprite.Sprite):
         sprite_index = (self.animation_count // self.animation_delay) % len(sprites)
         self.sprite = sprites[sprite_index]
         self.animation_count += 1
+        self.update()
+
+   def update(self):
+       self.rect = self.sprite.get_rect(topleft=(self.rect.x, self.rect.y))
+       self.mask = pygame.mask.from_surface(self.sprite)
 
 
    def draw(self, win):
