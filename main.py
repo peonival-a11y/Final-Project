@@ -163,20 +163,12 @@ def handle_move(player):
          player.move_right(player_vel)
 
 def draw_objects(window, player, objects):
-    """
-    Handles all drawing operations for a single frame.
-    Draws background first, then static objects, then the player.
-    """
     window.blit(background_image, (0, 0))
     
     # Draw all static objects/blocks
     for obj in objects:
         obj.draw(window)
-
-    # Draw the player on top of everything else
     player.draw(window)
-
-    # Update the display once all elements are drawn
     pygame.display.update()
 
 def main(window):
@@ -185,7 +177,9 @@ def main(window):
     block_size = 96
 
     player = Player(100, 100, 50, 50)
-    blocks = [Block(0, height - block_size, block_size)]
+    floor = [Block(i * block_size, height - block_size, block_size) 
+             for i in range (-width // block_size, (width * 2) // block_size)]
+    
 
     run = True
     while run:
@@ -199,7 +193,7 @@ def main(window):
         player.loop(fps)
         handle_move(player)
         
-        for block in blocks:
+        for block in floor:
             block.draw(window)
 
         player.draw(window)# DO NOT REMOVE THIS IT FIXED ISSUE OF IT APPEARING 
