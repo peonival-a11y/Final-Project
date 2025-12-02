@@ -236,7 +236,7 @@ def main(window):
                 if event.key == pygame.K_SPACE and player.jump_count < 2:
                     player.jump()
 
-        window.blit(background_image, (0, 0))
+        
         player.loop(fps)
         handle_move(player, floor)
         draw_objects(window, player, floor, offset_x)
@@ -245,10 +245,8 @@ def main(window):
                 (player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
             offset_x += player.x_vel
         
-        for block in floor:
-            block.draw(window, offset_x)
 
-        player.draw(window, offset_x)# DO NOT REMOVE THIS IT FIXED ISSUE OF IT APPEARING 
+        
         pygame.display.flip() # Update the full display Surface to the screen
 
     pygame.quit()
