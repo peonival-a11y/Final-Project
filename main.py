@@ -175,8 +175,25 @@ class Block(Object):
         self.image.blit(block, (0, 0))
         self.mask = pygame.mask.from_surface(self.image)
 
-
 class Coin(Object):
+    sprites = load_sprite_sheets("Items", "Coin", 32, 32, True)["rotate_right"]
+    animation_delay = 2
+
+    def __init__(self, x, y, size):
+        super().__init__(x, y, size, size, "coin")
+        self.animation_count = 0
+        self.image = self.sprites[0]
+
+    def update(self):
+        sprite_index = (self.animation_count // self.animation_delay) % len(self.sprites)
+        self.image = self.sprites[sprite_index]
+        self.animation_count += 1
+        self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
+        self.mask = pygame.mask.from_surface(self.image)
+
+    def draw(self, win, offset_x):
+        self.update() 
+        win.blit(self.image, (self.rect.x - offset_x, self.rect.y))
 
 def handle_verticle_collision(player,objects, dy):
     collided_objects = []
@@ -220,14 +237,26 @@ def handle_move(player, objects):
 
     handle_verticle_collision(player, objects, player.y_vel)
 
-def draw_objects(window, player, objects, offset_x):
+def draw_objects(window, player, objects, coins, offset_x):
     window.blit(background_image, (0, 0))
     
     # Draw all static objects/blocks
     for obj in objects:
         obj.draw(window, offset_x)
+
+    for coin in coins:
+        coin.draw(window, offset_x)
     player.draw(window, offset_x)
-    pygame.display.update()
+
+def handle_coin_collision(player, coins):
+    collected_coins = []
+    for coin in coins:
+        if pygame.sprite.collide_mask(player, coin):
+            collected_coins.append(coin)
+            # You can add a score increase or sound effect here later
+
+    for coin in collected_coins:
+        coins.remove(coin)
 
 def main(window):
     clock = pygame.time.Clock()
@@ -241,6 +270,11 @@ def main(window):
     objects = [*floor, Block(0, height - block_size * 2, block_size),
                Block(block_size * 3, height - block_size * 4, block_size)]
     
+    coins = [
+        Coin(block_size * 3, height - block_size * 2, 32), # Example coin 1
+        Coin(block_size * 3, height - block_size * 5, 32), # Example coin 2
+    ]
+
     offset_x = 0
     scroll_area_width = 200
 
@@ -260,7 +294,8 @@ def main(window):
         
         player.loop(fps)
         handle_move(player, objects)
-        draw_objects(window, player, objects, offset_x)
+        handle_coin_collision(player, coins)
+        draw_objects(window, player, objects, coins, offset_x)
 
         if ((player.rect.right - offset_x >= width - scroll_area_width) and player.x_vel > 0) or (
                 (player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
