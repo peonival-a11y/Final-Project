@@ -73,7 +73,7 @@ background_image = pygame.transform.scale(background_image, (width, height))
 class Player(pygame.sprite.Sprite):
    color = (255, 0, 0)
    gravity = 1
-   sprites = load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True) #name of the character here between "" and the MainCharacters is for the directory folder
+   sprites = load_sprite_sheets("MainCharacters", "Cat", 32, 32, True) #name of the character here between "" and the MainCharacters is for the directory folder
    animation_delay = 3 # changes the speed of the sprites movements
    
 
