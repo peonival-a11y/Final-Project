@@ -21,7 +21,8 @@ def flip(sprites):
 
 def load_sprite_sheets(dir1, dir2, width, height, direction=False):
     script_dir = os.path.dirname(__file__)
-    path = os.path.join(script_dir, "Assets", dir1, dir2)
+    root_dir = os.path.abspath(os.path.join(script_dir, os.pardir))
+    path = os.path.join(root_dir, "Assets", dir1, dir2)
 
     images_files = [f for f in listdir(path) if isfile(join(path, f))]
 
@@ -55,7 +56,9 @@ def load_sprite_sheets(dir1, dir2, width, height, direction=False):
     return all_sprites
 
 def get_block(size):
-    path = join("Assets", "Terrain", "Terrain.png")
+    script_dir = os.path.dirname(__file__)
+    root_dir = os.path.abspath(os.path.join(script_dir, os.pardir))
+    path = os.path.join(root_dir, "Assets", "Terrain", "Terrain.png")
     image = pygame.image.load(path).convert_alpha()
     surface = pygame.Surface((size, size), pygame.SRCALPHA, 32)
     rect = pygame.Rect(96, 0, size, size) # the 96 is for the block we are using based on the tutorial
@@ -65,7 +68,9 @@ def get_block(size):
 script_dir = os.path.dirname(__file__) 
 
 # to help with directory to retrive the image for the background
-image_path = os.path.join(script_dir, 'Assets', 'tempbg.png')
+script_dir = os.path.dirname(__file__)
+root_dir = os.path.abspath(os.path.join(script_dir, os.pardir))
+image_path = os.path.join(root_dir, 'Assets', 'tempbg.png') 
 background_image = pygame.image.load(image_path).convert()
 background_image = pygame.transform.scale(background_image, (width, height))
 
