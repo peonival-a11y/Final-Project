@@ -176,6 +176,8 @@ class Block(Object):
         self.mask = pygame.mask.from_surface(self.image)
 
 
+class Coin(Object):
+
 def handle_verticle_collision(player,objects, dy):
     collided_objects = []
     for obj in objects:
